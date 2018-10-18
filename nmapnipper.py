@@ -53,7 +53,7 @@ with open(args.result, "w") as results:
 def nmap_tara(ip, port, nmapargs):
     print(bcolors.OKBLUE + "[!] Nmap scan started. It may take a few minutes .")
     nm = nmap.PortScanner()
-    nm.scan(ip,port, arguments="-sS -T4")
+    nm.scan(ip,port, arguments=nmapargs)
     scanlist = list()
     for host in nm.all_hosts():
         if nm[host].state() == 'up':
