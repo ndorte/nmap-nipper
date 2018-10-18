@@ -1,0 +1,5 @@
+python-nmap
+requests
+bs4
+argparse
+socket
