@@ -1,5 +1,5 @@
 # nmap-nipper
-pip3 install requirements.txt
+pip3 install -r requirements.txt
 #
 usage: sudo python3 nmapnipper.py -i ipadress or iprange -p port or port range
 #
