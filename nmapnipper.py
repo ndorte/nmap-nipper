@@ -19,8 +19,11 @@ print('''
 | . ` | '_ ` _ \ / _` | '_ \  | . ` | | '_ \| '_ \ / _ \ '__|
 | |\  | | | | | | (_| | |_) | | |\  | | |_) | |_) |  __/ |   
 |_| \_|_| |_| |_|\__,_| .__/  |_| \_|_| .__/| .__/ \___|_|   
-by Uğur Kubilay Çam   | |             | |   | |              
+                      | |             | |   | |              
                       |_|             |_|   |_|              
+
+by Uğur Kubilay Çam
+https://github.com/ndorte/nmap-nipper
 ''')
 
 parser = argparse.ArgumentParser()
