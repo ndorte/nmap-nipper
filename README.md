@@ -1,5 +1,5 @@
 # nmap-nipper
-pip3 install -r requirements.txt
+sudo pip3 install -r requirements.txt
 #
 see all parameters or help: sudo python3 nmapripper.py -h
 #
