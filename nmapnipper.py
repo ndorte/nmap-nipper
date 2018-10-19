@@ -29,7 +29,7 @@ https://github.com/ndorte/nmap-nipper
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--ip", help="ip address or ip range. e.g. 192.168.1.1, 192.168.1.0/24")
 parser.add_argument("-p", "--port", help="port or port range. e.g. 80, 1-1024")
-parser.add_argument("-n", "--nmap", help="nmap args. default: -sS -T4", nargs='?', type=str, default="-sS -T 4")
+parser.add_argument("-n", "--nmap", help="nmap args. default: -sS -T4", nargs='?', type=str, default="-sS -T4")
 parser.add_argument("-l", "--list", help="scan list. default: list.txt", nargs='?', type=str, default="list.txt")
 parser.add_argument("-r", "--result", help="result list. default: result.txt", nargs='?', type=str,
                     default="result.txt")
