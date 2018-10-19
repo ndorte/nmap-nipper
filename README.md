@@ -13,4 +13,4 @@ e.g. sudo python3 nmapnipper.py -i 192.168.1.1-255 -p 1-8888 -n "-sS -sV -T4" -l
 #
 scan nmap xml report: sudo python3 nmapripper.py -x [xmlfile]
 
-e.g. sudo python3 nmapripper.py -x nmapReport.xml
+e.g. sudo python3 nmapnipper.py -x nmapReport.xml
