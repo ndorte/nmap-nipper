@@ -33,7 +33,6 @@ parser.add_argument("-r", "--result", help="result list. default: result.txt", n
 parser.add_argument("-x", "--xml", help="you can scan nmap xml report", nargs='?', type=str, default="none")
 args = parser.parse_args()
 
-
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
