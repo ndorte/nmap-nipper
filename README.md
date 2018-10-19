@@ -1,8 +1,13 @@
 # nmap-nipper
 pip3 install -r requirements.txt
 #
-usage: sudo python3 nmapnipper.py -i ipadress or iprange -p port or port range
+see all parameters or help: sudo python3 nmapripper.py -h
 #
-e.g. sudo python3 nmapnipper.py -i 192.168.1.1 -p 1-1024
+normal nipper: sudo python3 nmapnipper.py -i [ipadress or ip range] -p [port or port range]
+e.g. sudo python3 nmapnipper.py -i 192.168.1.1 -p 1-8888
 #
-optional usage: sudo python3 nmapnipper.py -i 192.168.1.1 -p 1-1024 -n "-sS -sV -T4" -l target.txt -r result.txt
+advanced nipper: sudo python3 nmapnipper.py -i [ipadress or ip range] -p [port or port range] -n [nmap options] -l [ip:port list] -r [save result list]
+e.g. sudo python3 nmapnipper.py -i 192.168.1.1-255 -p 1-8888 -n "-sS -sV -T4" -l list.txt -r result.txt
+#
+scan nmap xml report: sudo python3 nmapripper.py -x [xmlfile]
+e.g. sudo python3 nmapripper.py -x nmapReport.xml
