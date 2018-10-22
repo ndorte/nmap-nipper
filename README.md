@@ -5,7 +5,7 @@ Nmap Ripper performs a standard Nmap scan. It then sends http, https, and socket
 *This program was made for pentests. The user is responsible for all illegal use. The program author is not responsible for illegal use.*
 
 **Usage:**
- - Download modules pip3 install -r requirements.txt
+ - Download and install Python modules `pip3 install -r requirements.txt`
  - See all parameters or help: `sudo python3 nmapripper.py -h`
 
  - Normal nipper: sudo python3 nmapnipper.py -i [ipadress or ip range] -p [port or port range]
