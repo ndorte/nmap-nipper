@@ -1,6 +1,6 @@
 **Nmap Nipper**
 
-Nmap Ripper performs a standard Nmap scan. It then sends http, https, and socket requests to the open ports found. Records the responsed connection information and protocols.
+Nmap Ripper performs a standard Nmap scan. It then sends http, https, and socket requests to the open ports found. Records the responsed connection information and protocols. It can also optionally scan nmap xml output.
 
 *This program was made for pentests. The user is responsible for all illegal use. The program author is not responsible for illegal use.*
 
