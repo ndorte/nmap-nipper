@@ -1,12 +1,12 @@
 **Nmap Nipper**
 
-Nmap Ripper performs a standard Nmap scan. It then sends http, https, and socket requests to the open ports found. Records the responsed connection information and protocols. It can also optionally scan nmap xml output.
+Nmap Nipper performs a standard Nmap scan. It then sends http, https, and socket requests to the open ports found. Records the responsed connection information and protocols. It can also optionally scan nmap xml output.
 
 *This program was made for pentests. The user is responsible for all illegal use. The program author is not responsible for illegal use.*
 
 **Usage:**
  - Download and install Python modules `pip3 install -r requirements.txt`
- - See all parameters or help: `sudo python3 nmapripper.py -h`
+ - See all parameters or help: `sudo python3 nmapnipper.py -h`
 
  - Normal nipper: sudo python3 nmapnipper.py -i [ipadress or ip range] -p [port or port range]
 
