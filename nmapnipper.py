@@ -21,9 +21,11 @@ print('''
 |_| \_|_| |_| |_|\__,_| .__/  |_| \_|_| .__/| .__/ \___|_|   
                       | |             | |   | |              
                       |_|             |_|   |_|              
-
+                      
 by Uğur Kubilay Çam
 https://github.com/ndorte/nmap-nipper
+Python 4 Hackers > https://www.python4hackers.com
+
 ''')
 
 parser = argparse.ArgumentParser()
@@ -36,20 +38,19 @@ parser.add_argument("-r", "--result", help="result list. default: result.txt", n
 parser.add_argument("-x", "--xml", help="you can scan nmap xml report", nargs='?', type=str, default="none")
 args = parser.parse_args()
 
+
 class bcolors:
-    HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
     WARNING = '\033[93m'
     FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+
 
 try:
     with open(args.result, "w") as results:
-        results.writelines("Host" + (" " * 17) + "\tConnection" + (" " * 3) + "\tCode" + (" " * 6) + "\tTitle / Message\n" +
-                           ("-" * 20) + "\t" + ("-" * 13) + "\t" + ("-" * 10) + "\t" + ("-" * 27))
+        results.writelines(
+            "Host" + (" " * 17) + "\tConnection" + (" " * 3) + "\tCode" + (" " * 6) + "\tTitle / Message\n" +
+            ("-" * 20) + "\t" + ("-" * 13) + "\t" + ("-" * 10) + "\t" + ("-" * 27))
         results.close()
 
 
@@ -59,7 +60,7 @@ try:
         scanlist = list()
         for host in nm.all_hosts():
             if nm[host].state() == 'up':
-                print(bcolors.OKGREEN + '[+] Host : %s (%s)' % (host, nm[host].hostname()))
+                print(bcolors.OKGREEN + '[+] Host : {} ({})'.format(host, nm[host].hostname()))
             else:
                 continue
             for protokol in nm[host].all_protocols():
@@ -67,7 +68,7 @@ try:
                 for port in lport:
                     add = (host + ":" + str(port) + "\n")
                     scanlist.append(add)
-                    print(bcolors.OKGREEN + '[+] %s %s:%s is open. Added to target list' % (protokol, host, port))
+                    print(bcolors.OKGREEN + '[+] {} {}:{} is open. Added to target list'.format(protokol, host, port))
         with open(args.list, "w") as lists:
             lists.writelines(scanlist)
             lists.close()
@@ -75,7 +76,7 @@ try:
             time.sleep(2)
 
 
-    def socketResponse(host):
+    def socket_response(host):
         portParse = list(map(str, host.split(":")))
         ip = portParse[0]
         port = int(portParse[1])
@@ -84,11 +85,12 @@ try:
         s.settimeout(2)
         mesaj = (s.recv(4096))
         kaydet = str(mesaj)
-        resultadd(host, "Socket", "-", kaydet)
-        print(bcolors.OKGREEN + "[+] " + host + " Socket responded and was added to the result list. Msg: " + str(mesaj))
+        result_add(host, "Socket", "-", kaydet)
+        print(
+            bcolors.OKGREEN + "[+] {} Socket responded and was added to the result list. Msg: {}".format(host, str(mesaj)))
 
 
-    def httpResponse(host):
+    def http_response(host):
         http = ("http://" + host)
         s = requests.get(http, verify=False, timeout=2)
         soup = bs4.BeautifulSoup(s.text, "html.parser")
@@ -97,13 +99,11 @@ try:
             title = "None"
         else:
             title = a.string
-        resultadd(host, "Http", str(s.status_code), title)
-        print(
-            bcolors.OKGREEN + "[+] " + host + " Http responded and was added to the result list. Title: " + title + ", Code: " + str(
-                s.status_code))
+        result_add(host, "Http", str(s.status_code), title)
+        print(bcolors.OKGREEN + "[+] {} Http responded and was added to the result list. Title: {}, Code: {}".format(host, title, str(s.status_code)))
 
 
-    def httpsResponse(host):
+    def https_response(host):
         https = ("https://" + host)
         s = requests.get(https, verify=False, timeout=2)
         soup = bs4.BeautifulSoup(s.text, "html.parser")
@@ -112,31 +112,29 @@ try:
             title = "None"
         else:
             title = a.string
-        resultadd(host, "Https", str(s.status_code), title)
-        print(
-            bcolors.OKGREEN + "[+] " + host + " Https responded and was added to the result list. Title: " + title + ", Code: " + str(
-                s.status_code))
+        result_add(host, "Https", str(s.status_code), title)
+        print(bcolors.OKGREEN + "[+] {} Https responded and was added to the result list. Title: {}, Code: {}".format(host, title, str(s.status_code)))
 
 
     def port_scan():
-        with open(args.list, "r") as list:
-            for i in list.readlines():
+        with open(args.list, "r") as rdlist:
+            for i in rdlist.readlines():
                 host = i.strip()
                 try:
-                    httpResponse(host)
+                    http_response(host)
                 except:
-                    print(bcolors.FAIL + "[-] " + host + " Http did not respond")
+                    print(bcolors.FAIL + "[-] {} Http did not respond".format(host))
                 try:
-                    httpsResponse(host)
+                    https_response(host)
                 except:
-                    print(bcolors.FAIL + "[-] " + host + " Https did not respond")
+                    print(bcolors.FAIL + "[-] {} Https did not respond".format(host))
                 try:
-                    socketResponse(host)
+                    socket_response(host)
                 except:
-                    print(bcolors.FAIL + "[-] " + host + " Socket did not respond")
+                    print(bcolors.FAIL + "[-] {} Socket did not respond".format(host))
 
 
-    def resultadd(host, connection, code, title):
+    def result_add(host, connection, code, title):
         with open(args.result, "a") as results:
             results.writelines("\n" + host + (" " * (21 - len(host))) + "\t" + connection + (
                     " " * (13 - len(connection))) + "\t" + code + (" " * (10 - len(code))) + "\t" + title)
@@ -160,25 +158,34 @@ try:
             print(bcolors.OKBLUE + "[!] Nmap xml file parsed > list.txt")
 
 
-    def xmlnipper():
+    def xml_nipper():
         file = NmapParser.parse_fromfile(args.xml)
         xml_parser(file)
 
-    if args.xml == "none":
+
+    def scan_with_nmap():
         print(bcolors.OKBLUE + "[!] Nmap scan started. It may take a few minutes")
         nmap_scan(args.ip, args.port, args.nmap)
         print(bcolors.OKBLUE + "[!] Starting Http, Https, Socket scan..")
         port_scan()
-    else:
-        xmlnipper()
+
+
+    def scan_with_xml():
+        xml_nipper()
         print(bcolors.OKBLUE + "[!] Starting Http, Https, Socket scan..")
         port_scan()
+
+
+    if args.xml == "none":
+        scan_with_nmap()
+    else:
+        scan_with_xml()
+
 except:
     print('''
 Error!
 
 see all parameters or help: sudo python3 nmapripper.py -h
-
 normal nipper: sudo python3 nmapnipper.py -i [ipadress or ip range] -p [port or port range]
 e.g. sudo python3 nmapnipper.py -i 192.168.1.1 -p 1-8888
 
@@ -187,5 +194,4 @@ e.g. sudo python3 nmapnipper.py -i 192.168.1.1-255 -p 1-8888 -n "-sS -sV -T4" -l
 
 nmap xml report nipper: sudo python3 nmapripper.py -x [xmlfile]
 e.g. sudo python3 nmapnipper.py -x nmapReport.xml
-    
-    ''')
+''')
