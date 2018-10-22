@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import nmap
-import socket
-import time
-import requests
-import bs4
-import argparse
+import nmap, socket, time, requests, bs4, argparse
 from libnmap.process import NmapProcess
 from libnmap.parser import NmapParser, NmapParserException
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -49,8 +44,9 @@ class bcolors:
 try:
     with open(args.result, "w") as results:
         results.writelines(
-            "Host" + (" " * 17) + "\tConnection" + (" " * 3) + "\tCode" + (" " * 6) + "\tTitle / Message\n" +
-            ("-" * 20) + "\t" + ("-" * 13) + "\t" + ("-" * 10) + "\t" + ("-" * 27))
+            "Host{}\tConnection{}\tCode{}\tTitle / Message\n{}\t{}\t{}\t{}".format((" " * 19), (" " * 3), (" " * 6),
+                                                                                   ("-" * 23), ("-" * 13), ("-" * 10),
+                                                                                   ("-" * 27)))
         results.close()
 
 
@@ -87,7 +83,8 @@ try:
         kaydet = str(mesaj)
         result_add(host, "Socket", "-", kaydet)
         print(
-            bcolors.OKGREEN + "[+] {} Socket responded and was added to the result list. Msg: {}".format(host, str(mesaj)))
+            bcolors.OKGREEN + "[+] {} Socket responded and was added to the result list. Msg: {}".format(host,
+                                                                                                         str(mesaj)))
 
 
     def http_response(host):
@@ -100,7 +97,11 @@ try:
         else:
             title = a.string
         result_add(host, "Http", str(s.status_code), title)
-        print(bcolors.OKGREEN + "[+] {} Http responded and was added to the result list. Title: {}, Code: {}".format(host, title, str(s.status_code)))
+        print(
+            bcolors.OKGREEN + "[+] {} Http responded and was added to the result list. Title: {}, Code: {}".format(host,
+                                                                                                                   title,
+                                                                                                                   str(
+                                                                                                                       s.status_code)))
 
 
     def https_response(host):
@@ -113,7 +114,8 @@ try:
         else:
             title = a.string
         result_add(host, "Https", str(s.status_code), title)
-        print(bcolors.OKGREEN + "[+] {} Https responded and was added to the result list. Title: {}, Code: {}".format(host, title, str(s.status_code)))
+        print(bcolors.OKGREEN + "[+] {} Https responded and was added to the result list. Title: {}, Code: {}".format(
+            host, title, str(s.status_code)))
 
 
     def port_scan():
@@ -136,8 +138,9 @@ try:
 
     def result_add(host, connection, code, title):
         with open(args.result, "a") as results:
-            results.writelines("\n" + host + (" " * (21 - len(host))) + "\t" + connection + (
-                    " " * (13 - len(connection))) + "\t" + code + (" " * (10 - len(code))) + "\t" + title)
+            results.writelines("\n{}{}\t{}{}\t{}{}\t{}".format(host, (" " * (23 - len(host))), connection,
+                                                               (" " * (13 - len(connection))), code,
+                                                               (" " * (10 - len(code))), title))
             results.close()
 
 
