@@ -1,5 +1,6 @@
 **Nmap Nipper**
-*This program was made for pentest. The user is responsible for all illegal use. The program author is not responsible for illegal use.*
+
+*This program was made for pentests. The user is responsible for all illegal use. The program author is not responsible for illegal use.*
 
 **Usage:**
  - Download modules pip3 install -r requirements.txt
