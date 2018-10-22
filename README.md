@@ -1,4 +1,5 @@
 # nmap-nipper
+-This program was made for pentests. The user is responsible for all illegal use. The program author accepts no responsibility.
 sudo pip3 install -r requirements.txt
 #
 see all parameters or help: sudo python3 nmapripper.py -h
