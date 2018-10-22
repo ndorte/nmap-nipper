@@ -188,7 +188,7 @@ except:
     print('''
 Error!
 
-see all parameters or help: sudo python3 nmapripper.py -h
+see all parameters or help: sudo python3 nmapnipper.py -h
 normal nipper: sudo python3 nmapnipper.py -i [ipadress or ip range] -p [port or port range]
 e.g. sudo python3 nmapnipper.py -i 192.168.1.1 -p 1-8888
 
