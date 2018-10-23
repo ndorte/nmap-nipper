@@ -1,6 +1,6 @@
 **Nmap Nipper**
 
-Nmap Nipper performs a standard Nmap scan. It then sends http, https, and socket requests to the open ports found. Records the responsed connection information and protocols. It can also optionally scan nmap xml output.
+Nmap Nipper finds the open ports of the target using the Nmap in the background and it connects to open ports with HTTP, HTTPS and Socket methods and reports the banner grabbing informations. It can also scan in Nmap's XML report file.
 
 *This program was made for pentests. The user is responsible for all illegal use. The program author is not responsible for illegal use.*
 
